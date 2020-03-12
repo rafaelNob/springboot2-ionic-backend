@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Cidade implements Serializable {
 
@@ -18,7 +20,9 @@ public class Cidade implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-
+	
+	
+	@JsonIgnoreProperties(value = {"cidade"})
 	@ManyToOne
 	@JoinColumn(name = "estado_id") // nome da chave estrangeria na tabela estado
 	private Estado estado;

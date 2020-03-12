@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Categoria implements Serializable {
@@ -23,7 +22,7 @@ public class Categoria implements Serializable {
 	private Integer id;
 	private String nome;
 	
-	@JsonIgnoreProperties(value = {"Categorias"})// evita a busca ciclica ou seja ele vai em produtos e busca e no lado doproduto faz o mesmo (que gera erro)
+	@JsonIgnoreProperties(value = {"categorias"})// evita a busca ciclica ou seja ele vai em produtos e busca e no lado doproduto faz o mesmo (que gera erro)
 	@ManyToMany(mappedBy = "categorias") //referencia o atributo categorias
 	private List<Produto> produtos = new ArrayList<>();
 
@@ -58,7 +57,7 @@ public class Categoria implements Serializable {
 	}
 
 	public void setProdutos(List<Produto> produtos) {
-		produtos = produtos;
+		this.produtos = produtos;
 	}
 
 	@Override

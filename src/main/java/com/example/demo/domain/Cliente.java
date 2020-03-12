@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.example.demo.enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Cliente implements Serializable {
@@ -27,12 +29,15 @@ public class Cliente implements Serializable {
 	private String email;
 	private String cpfouCnpj;
 	private Integer tipo;
-
+	
+	
+	@JsonIgnoreProperties(value = {"cliente"})
 	@OneToMany(mappedBy = "cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
 	/**
 	 * UMA LISTA DE ENTIDADE FRACA
 	 */
+	
 	@ElementCollection // Entidade fraca
 	@CollectionTable(name = "telefone") // cria uma tabela com telefones
 	private Set<String> telefones = new HashSet<>();
