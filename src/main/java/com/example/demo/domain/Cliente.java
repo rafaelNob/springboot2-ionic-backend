@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import com.example.demo.enums.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 @Entity
 public class Cliente implements Serializable {
@@ -25,11 +27,13 @@ public class Cliente implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	private String nome;
 	private String email;
 	private String cpfouCnpj;
 	private Integer tipo;
 	
+
 	
 	@JsonIgnoreProperties(value = {"cliente"})
 	@OneToMany(mappedBy = "cliente")
@@ -41,6 +45,11 @@ public class Cliente implements Serializable {
 	@ElementCollection // Entidade fraca
 	@CollectionTable(name = "telefone") // cria uma tabela com telefones
 	private Set<String> telefones = new HashSet<>();
+	
+	
+	@JsonIgnoreProperties(value = {"cliente"})
+	@OneToMany(mappedBy = "cliente")
+	private  List<Pedido> Pedidos = new ArrayList<>();
 
 	public Cliente() {
 	}
@@ -107,6 +116,14 @@ public class Cliente implements Serializable {
 
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
+	}
+
+	public List<Pedido> getPedidos() {
+		return Pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		Pedidos = pedidos;
 	}
 
 	@Override
