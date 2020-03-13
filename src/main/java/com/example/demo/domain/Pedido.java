@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -26,26 +28,31 @@ public class Pedido implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date instante;
 	
 	/**
 	 * Mapeamento bi direcional 1 1
 	 */
-	
-	 @OneToOne(cascade = CascadeType.ALL,mappedBy = "pedido") 
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL,mappedBy = "pedido") 
 	private Pagamento pagamento;
 	
-	@JsonIgnoreProperties(value = {"pedidos"})
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 	
-	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "endereco_entrega_Id")
 	private Endereco enderecoDeEntrega;
 	
+	/**
+	 * RELACIONAMENTO DO RELACIONAMENTO CHAVE COMPOSTA
+	 */
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "id.pedido")
 	private Set<ItemPedido> itens = new HashSet<>();
 	

@@ -15,10 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.example.demo.enums.TipoCliente;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Cliente implements Serializable {
@@ -27,39 +24,35 @@ public class Cliente implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	private String nome;
 	private String email;
 	private String cpfouCnpj;
 	private Integer tipo;
-	
 
-	
-	@JsonIgnoreProperties(value = {"cliente"})
 	@OneToMany(mappedBy = "cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
 	/**
 	 * UMA LISTA DE ENTIDADE FRACA
 	 */
-	
+
 	@ElementCollection // Entidade fraca
 	@CollectionTable(name = "telefone") // cria uma tabela com telefones
 	private Set<String> telefones = new HashSet<>();
-	
-	
-	@JsonIgnoreProperties(value = {"cliente"})
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
-	private  List<Pedido> Pedidos = new ArrayList<>();
+	private List<Pedido> Pedidos = new ArrayList<>();
 
 	public Cliente() {
 	}
 
-	public Cliente(Integer id, String nome, String email, String cpfouCnpj , TipoCliente tipoCliente ) {
+	public Cliente(Integer id, String nome, String email, String cpfouCnpj, TipoCliente tipoCliente) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.cpfouCnpj = cpfouCnpj;
-		 this.tipo = tipoCliente.getCod(); 
+		this.tipo = tipoCliente.getCod();
 	}
 
 	public Integer getId() {
@@ -149,6 +142,12 @@ public class Cliente implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Cliente [id=" + id + ", nome=" + nome + ", email=" + email + ", cpfouCnpj=" + cpfouCnpj + ", tipo="
+				+ tipo + ", enderecos=" + enderecos + ", telefones=" + telefones + ", Pedidos=" + Pedidos + "]";
 	}
 
 }

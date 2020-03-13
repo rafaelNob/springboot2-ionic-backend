@@ -15,7 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Produto implements Serializable {
@@ -30,28 +30,27 @@ public class Produto implements Serializable {
 	private Double preco;
 	
 	
-	@JsonIgnoreProperties(value = {"produtos"})
+	@JsonIgnore //breca ciclica
 	@ManyToMany
 	@JoinTable(name = "produto_Categoria", // referencia o nome da tabela intermediaria
-			joinColumns = @JoinColumn(name = "produto_id"), // referencia o nome da tabela estrangeira
-			inverseJoinColumns = @JoinColumn(name = "categoria_id") // referencia o nome da tabela estrangeira
-	)
-	
+			joinColumns = @JoinColumn(name = "produto_id"), // referencia o nome na tabela estrangeira
+			inverseJoinColumns = @JoinColumn(name = "categoria_id") // referencia o nome na tabela estrangeira
+	)	
 	private List<Categoria> categorias = new ArrayList<>();
 	
-	
+	@JsonIgnore //ignora a referencia ciclica
 	@OneToMany(mappedBy = "id.produto")
 	private Set<ItemPedido> itens = new HashSet<>();
 
-	public Produto() {
-	}
+	public Produto() {}
+	
 
 	public Produto(Integer id, String nome, Double preco) {
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
 	}
-	
+	@JsonIgnore
 	public List<Pedido> getPedidos(){
 		
 		List<Pedido> lista = new ArrayList<>();

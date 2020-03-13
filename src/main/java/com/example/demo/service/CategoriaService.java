@@ -14,9 +14,20 @@ public class CategoriaService {
 	@Autowired
 	private CategoriaRepository  categoriaRepository;
 	
-	public Categoria buscar(Integer id) {
+	public Categoria find(Integer id) {
 		
 		return categoriaRepository.findById(id).orElse(null);
+	}
+	
+	
+	public Categoria inserir(Categoria categoria) {
+		
+		return categoriaRepository.save(categoria);
+	}
+	
+public Categoria update(Categoria categoria) {
+		find(categoria.getId());
+		return categoriaRepository.save(categoria);
 	}
 
 }

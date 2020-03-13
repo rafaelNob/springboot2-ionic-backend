@@ -10,7 +10,9 @@ import javax.persistence.ManyToOne;
 public class ItemPedidoPk implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+/**
+ * ID PARA AS 2 TABELAS RELACIONAMENTO
+ */
 	
 	@ManyToOne
 	@JoinColumn(name="pedido_id")
