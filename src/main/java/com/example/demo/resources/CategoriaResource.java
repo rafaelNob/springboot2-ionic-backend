@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -83,5 +86,27 @@ public class CategoriaResource {
 		return ResponseEntity.noContent().build();
 
 	}
+	
+	/**
+	 * PAGINAÇÃOO 
+	 */
+	
+	@GetMapping(value = "/page")
+	public ResponseEntity<Page<CategoriaDTO>> findAllPagination(
+			@RequestParam(value = "page",defaultValue = "0") Integer page,
+			@RequestParam(value = "linesPerPage",defaultValue = "10") Integer linesPerPage,
+			@RequestParam(value = "orderBy",defaultValue = "nome") String orderBy,
+			@RequestParam(value = "diretion",defaultValue = "ASC") String diretion) {
+		
+		 Page<Categoria> findPage = service.findPage(page, linesPerPage, orderBy, diretion);
+		 Page<CategoriaDTO> listaDto = findPage.map(CategoriaDTO::new);
+
+		
+		if (listaDto == null) {
+			throw new ObjectNotFoundException("Não encontrado " + findPage);
+		}
+		return ResponseEntity.ok().body(listaDto);
+	}
+
 
 }
