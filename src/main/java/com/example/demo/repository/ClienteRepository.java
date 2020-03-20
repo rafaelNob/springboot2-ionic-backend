@@ -12,6 +12,4 @@ import com.example.demo.domain.Cliente;
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 	
 	
-	@Query(value = "SELECT c FROM Cliente c WHERE c.id = :id")
-	Cliente encontrePorNomeEemail(@Param("id")Integer id);
 }

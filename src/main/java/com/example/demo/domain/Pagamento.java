@@ -2,6 +2,7 @@ package com.example.demo.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,7 +35,7 @@ public class Pagamento implements Serializable {
 	 * COMO É UM PARA UM O MESMO ID DO PEDIDO TEM Q SER IGUAL AO ID DO PAGAMENTO
 	 */
 	@JsonIgnore
-    @OneToOne  
+    @OneToOne(cascade = CascadeType.REMOVE)  
     @JoinColumn(name="pedido_id")	  
     @MapsId 
 	private Pedido pedido; 

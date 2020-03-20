@@ -4,9 +4,11 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
+import org.hibernate.cfg.beanvalidation.BeanValidationEventListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,8 +61,9 @@ public class CategoriaResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<Categoria> insert(@RequestBody Categoria obj) {
-		obj = service.inserir(obj);
+	public ResponseEntity<Categoria> insert(@Valid @RequestBody CategoriaDTO objDto) {
+		  Categoria dtoFromCategoriaDTO = service.dtoFromCategoriaDTO(objDto);
+		  Categoria obj = service.inserir(dtoFromCategoriaDTO);
 		/**
 		 * URI devolve a url nova
 		 */
@@ -103,7 +106,7 @@ public class CategoriaResource {
 
 		
 		if (listaDto == null) {
-			throw new ObjectNotFoundException("Não encontrado " + findPage);
+			throw new ObjectNotFoundException("Nenhuma lista Encontrada:  " + findPage);
 		}
 		return ResponseEntity.ok().body(listaDto);
 	}
