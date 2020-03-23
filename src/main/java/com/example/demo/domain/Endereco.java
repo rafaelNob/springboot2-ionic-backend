@@ -29,12 +29,12 @@ public class Endereco implements Serializable {
 	
 	
 	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.REMOVE)
+	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 	
 	@JsonIgnoreProperties(value = {"estado"})
-	@ManyToOne(cascade = CascadeType.REMOVE)
+	@ManyToOne
 	@JoinColumn(name="cidade_id")
 	private Cidade cidade;
 	

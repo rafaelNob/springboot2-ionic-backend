@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -29,8 +30,11 @@ public class Cliente implements Serializable {
 	private String email;
 	private String cpfouCnpj;
 	private Integer tipo;
+	/**
+	 *  CascadeType.ALL DELETA OS CLIENTES EM CASCATA JUNTAMENTO COM OS ENDEREÇOS
+	 */
 
-	@OneToMany(mappedBy = "cliente")
+	@OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 	/**
 	 * UMA LISTA DE ENTIDADE FRACA
