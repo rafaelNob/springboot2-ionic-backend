@@ -1,27 +1,25 @@
-package com.example.demo.dto;
+package com.nelioalves.cursomc.dto;
 
 import java.io.Serializable;
 
-import com.example.demo.domain.Cliente;
+import com.nelioalves.cursomc.domain.Produto;
 
-public class ClienteDTO implements Serializable {
-
+public class ProdutoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private Integer id;
-	
 	private String nome;
+	private Double preco;
 	
-	private String email;
-	
-	public ClienteDTO() {}
-	
-	public ClienteDTO(Cliente obj) {
-		id = obj.getId();
-		nome = obj.getNome();
-		email = obj.getEmail();
+	public ProdutoDTO() {
 	}
 
+	public ProdutoDTO(Produto obj) {
+		id = obj.getId();
+		nome = obj.getNome();
+		preco = obj.getPreco();
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -38,12 +36,11 @@ public class ClienteDTO implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getEmail() {
-		return email;
+	public Double getPreco() {
+		return preco;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setPreco(Double preco) {
+		this.preco = preco;
 	}
-
 }

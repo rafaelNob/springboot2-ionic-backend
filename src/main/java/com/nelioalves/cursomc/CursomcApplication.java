@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.nelioalves.cursomc;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -8,32 +8,32 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.demo.domain.Categoria;
-import com.example.demo.domain.Cidade;
-import com.example.demo.domain.Cliente;
-import com.example.demo.domain.Endereco;
-import com.example.demo.domain.Estado;
-import com.example.demo.domain.ItemPedido;
-import com.example.demo.domain.Pagamento;
-import com.example.demo.domain.PagamentoComBoleto;
-import com.example.demo.domain.PagamentoComCartao;
-import com.example.demo.domain.Pedido;
-import com.example.demo.domain.Produto;
-import com.example.demo.enums.EstadoPagamento;
-import com.example.demo.enums.TipoCliente;
-import com.example.demo.repository.CategoriaRepository;
-import com.example.demo.repository.CidadeRepository;
-import com.example.demo.repository.ClienteRepository;
-import com.example.demo.repository.EnderecoRepository;
-import com.example.demo.repository.EstadoRepository;
-import com.example.demo.repository.ItemPedidoRepository;
-import com.example.demo.repository.PagamentoRepository;
-import com.example.demo.repository.PedidoRepository;
-import com.example.demo.repository.ProdutoRepository;
+import com.nelioalves.cursomc.domain.Categoria;
+import com.nelioalves.cursomc.domain.Cidade;
+import com.nelioalves.cursomc.domain.Cliente;
+import com.nelioalves.cursomc.domain.Endereco;
+import com.nelioalves.cursomc.domain.Estado;
+import com.nelioalves.cursomc.domain.ItemPedido;
+import com.nelioalves.cursomc.domain.Pagamento;
+import com.nelioalves.cursomc.domain.PagamentoComBoleto;
+import com.nelioalves.cursomc.domain.PagamentoComCartao;
+import com.nelioalves.cursomc.domain.Pedido;
+import com.nelioalves.cursomc.domain.Produto;
+import com.nelioalves.cursomc.domain.enums.EstadoPagamento;
+import com.nelioalves.cursomc.domain.enums.TipoCliente;
+import com.nelioalves.cursomc.repositories.CategoriaRepository;
+import com.nelioalves.cursomc.repositories.CidadeRepository;
+import com.nelioalves.cursomc.repositories.ClienteRepository;
+import com.nelioalves.cursomc.repositories.EnderecoRepository;
+import com.nelioalves.cursomc.repositories.EstadoRepository;
+import com.nelioalves.cursomc.repositories.ItemPedidoRepository;
+import com.nelioalves.cursomc.repositories.PagamentoRepository;
+import com.nelioalves.cursomc.repositories.PedidoRepository;
+import com.nelioalves.cursomc.repositories.ProdutoRepository;
 
 @SpringBootApplication
 public class CursomcApplication implements CommandLineRunner {
-	
+
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 	@Autowired
@@ -53,7 +53,6 @@ public class CursomcApplication implements CommandLineRunner {
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
 	
-
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
 	}
@@ -158,5 +157,5 @@ public class CursomcApplication implements CommandLineRunner {
 		
 		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));		
 	}
-
+	
 }

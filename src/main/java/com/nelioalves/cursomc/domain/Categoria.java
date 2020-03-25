@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package com.nelioalves.cursomc.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,8 +12,8 @@ import javax.persistence.ManyToMany;
 
 @Entity
 public class Categoria implements Serializable {
-
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;

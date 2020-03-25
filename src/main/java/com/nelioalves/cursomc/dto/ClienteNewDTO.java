@@ -1,40 +1,52 @@
-package com.example.demo.dto;
+package com.nelioalves.cursomc.dto;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
+import com.nelioalves.cursomc.services.validation.ClienteInsert;
+
+@ClienteInsert
 public class ClienteNewDTO implements Serializable {
-
 	private static final long serialVersionUID = 1L;
-
-	@NotEmpty(message = "Preenchimento Obrigratório")
-	@Length(message = "O tamanho maximo entre 5 e 20", min = 5, max = 120)
+	
+	@NotEmpty(message="Preenchimento obrigatório")
+	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
 	private String nome;
 
-	@NotEmpty(message = "Preenchimento Obrigratório")
-	@Email(message = "Email Obrigatório")
+	@NotEmpty(message="Preenchimento obrigatório")
+	@Email(message="Email inválido")
 	private String email;
-	
-	@NotEmpty(message = "Preenchimento Obrigratório")
+
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String cpfOuCnpj;
+
 	private Integer tipo;
-
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String logradouro;
-	private String numero;
-	private String complemento;
-	private String bairro;
-	private String cep;
 
+	@NotEmpty(message="Preenchimento obrigatório")
+	private String numero;
+
+	private String complemento;
+
+	private String bairro;
+
+	@NotEmpty(message="Preenchimento obrigatório")
+	private String cep;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String telefone1;
+
 	private String telefone2;
+	
 	private String telefone3;
 
 	private Integer cidadeId;
-
+	
 	public ClienteNewDTO() {
 	}
 
@@ -141,5 +153,4 @@ public class ClienteNewDTO implements Serializable {
 	public void setCidadeId(Integer cidadeId) {
 		this.cidadeId = cidadeId;
 	}
-
 }
