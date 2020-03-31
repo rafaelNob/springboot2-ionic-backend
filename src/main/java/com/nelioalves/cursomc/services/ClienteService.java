@@ -31,7 +31,9 @@ public class ClienteService {
 	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
-	
+	/**
+	 * PARA CRIPTOGRAFAR SENHAS
+	 */
 	@Autowired
 	private BCryptPasswordEncoder pe;
 	
