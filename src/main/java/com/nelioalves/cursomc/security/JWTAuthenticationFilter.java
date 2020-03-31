@@ -30,8 +30,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
 	private JWTUtil jWTUtil;
 
-	public JWTAuthenticationFilter(
-			org.springframework.security.authentication.AuthenticationManager authenticationManager, JWTUtil jWTUtil) {
+	public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JWTUtil jWTUtil) {
 		this.AuthenticationManager = authenticationManager;
 		this.jWTUtil = jWTUtil;
 	}
