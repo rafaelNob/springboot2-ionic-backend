@@ -7,7 +7,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -24,6 +26,12 @@ import com.nelioalves.cursomc.security.JWTUtil;
 
 @Configuration
 @EnableWebSecurity
+/**
+ *  anotação para autorizar alguns perfis junto com @PreAuthorize("hasAnyRole('ADMIN')")
+ *	nos endPoints
+ *
+ */
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SegurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -37,7 +45,9 @@ public class SegurityConfig extends WebSecurityConfigurerAdapter {
 
 	private static final String[] PUBLIC_MATCHERS = { "/h2-console/**" };
 
-	private static final String[] PUBLIC_MATCHERS_GET = { "/produtos/**", "/categorias/**", "/clientes/**" };
+	private static final String[] PUBLIC_MATCHERS_GET = { "/produtos/**", "/categorias/**"};
+	
+	private static final String[] PUBLIC_MATCHERS_POST = {"/clientes/**" };
 
 	/**
 	 * Metodo que recebe o http para ver quem pode acessar o methodo
@@ -60,6 +70,8 @@ public class SegurityConfig extends WebSecurityConfigurerAdapter {
 		 */
 		http.authorizeRequests()
 				// habilita esses perfils somente para METHOD GET
+				.antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST)
+				.permitAll()
 				.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET)
 				.permitAll()
 				.antMatchers(PUBLIC_MATCHERS)
