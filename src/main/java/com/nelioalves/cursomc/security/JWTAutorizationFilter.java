@@ -39,7 +39,7 @@ public class JWTAutorizationFilter extends BasicAuthenticationFilter {
 		/**
 		 * Pega o Bearer Token
 		 */
-		String header = request.getHeader("Autorization");
+		String header = request.getHeader("Authorization");
 		//PROCEDIMENTO PARA LIBERAR O USUARIO QUE DESEJA ACESSAR O ENDPOINT
 		if (header != null && header.startsWith("Bearer ")) {
 			UsernamePasswordAuthenticationToken auth = getAuthentication(request, header.substring(7));
