@@ -78,7 +78,19 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.7.0</version>
 		</dependency>
-		<!-- //CONFIGURAÇÃO SEGURANÇA SPRING SECURITY E JWT -->
+		<!-- CONFIGURAÇÃO AMAZIN AWS -->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>1.11.133</version>
+		</dependency>
+<!-- 		AJUDA NA MANIPUTAÇÃO DAS EXTENSÕES  -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
