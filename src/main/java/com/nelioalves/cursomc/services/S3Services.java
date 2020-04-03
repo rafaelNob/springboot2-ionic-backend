@@ -17,6 +17,7 @@ import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.nelioalves.cursomc.services.exceptions.FileException;
 
 @Service
 public class S3Services {
@@ -48,7 +49,7 @@ public class S3Services {
 			String contentType = multipartFile.getContentType();
 			return uploadFile(is, fileName, contentType);
 		} catch (IOException e) {
-			throw new RuntimeException("Erro de IO " +e.getMessage());
+			throw new FileException("Erro de IO " +e.getMessage());
 		}
 
 	}
@@ -62,7 +63,7 @@ public class S3Services {
 			Log.info("fim Upload");
 			return S3Config.getUrl(bucketName, fileName).toURI();
 		} catch (URISyntaxException e) {
-			throw new RuntimeException("Erro ao convertert url para uri"+e.getMessage());
+			throw new FileException("Erro ao convertert url para uri"+e.getMessage());
 		}
 
 	}
