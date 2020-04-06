@@ -1,10 +1,12 @@
 package com.nelioalves.cursomc.services;
 
+import java.awt.image.BufferedImage;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,6 +37,9 @@ public class ClienteService {
 	private ClienteRepository repo;
 	
 	@Autowired
+	private ImageService imageService;
+	
+	@Autowired
 	private S3Services s3Services;
 	
 	@Autowired
@@ -44,6 +49,9 @@ public class ClienteService {
 	 */
 	@Autowired
 	private BCryptPasswordEncoder pe;
+	
+	@Value("${img.prefix.client.profile}")
+	private String prefixo;
 	
 	public Cliente find(Integer id) {
 		UserSS userAutenticado = UserService.usuarioAuthenticado();
@@ -123,13 +131,10 @@ public class ClienteService {
 			throw new AuthorizationException("Não Autorizado!");
 		}
 		
-		URI uri = s3Services.uploadFile(multipartFile);
-		Optional<Cliente> cli = repo.findById(userAutenticado.getId());
-		cli.get().setImageUrl(uri.toString());
-		repo.save(cli.orElse(null));
-		return uri;
-		 
-		
+		BufferedImage jpg = imageService.getJpgImageFromFile(multipartFile);
+		String fileName = prefixo +userAutenticado.getId()+ ".jpg";
+		 return s3Services.uploadFile(imageService.inputStream(jpg, "jpg"), fileName, "image");
+
 	}
 	
 	
