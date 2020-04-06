@@ -117,7 +117,18 @@ public class ClienteService {
 	}
 	
 	public URI uploadProfilePicture(MultipartFile multipartFile) {
-		return s3Services.uploadFile(multipartFile);
+		UserSS userAutenticado = UserService.usuarioAuthenticado();
+		
+		if(userAutenticado == null) {
+			throw new AuthorizationException("Não Autorizado!");
+		}
+		
+		URI uri = s3Services.uploadFile(multipartFile);
+		Optional<Cliente> cli = repo.findById(userAutenticado.getId());
+		cli.get().setImageUrl(uri.toString());
+		repo.save(cli.orElse(null));
+		return uri;
+		 
 		
 	}
 	
