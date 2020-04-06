@@ -48,6 +48,7 @@ public class SegurityConfig extends WebSecurityConfigurerAdapter {
 	
 	private static final String[] PUBLIC_MATCHERS_POST = {"/clientes","/auth/forgot/**" };
 
+
 	/**
 	 * Metodo que recebe o http para ver quem pode acessar o methodo
 	 */
@@ -105,9 +106,11 @@ public class SegurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
-
+		CorsConfiguration configuracaoCors = new CorsConfiguration().applyPermitDefaultValues();
+		//libera o cors para delete
+		configuracaoCors.setAllowedMethods(Arrays.asList("POST","PUT","DELETE","OPTIONS","GET"));
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+		source.registerCorsConfiguration("/**", configuracaoCors);
 
 		return source;
 	}

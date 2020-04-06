@@ -25,7 +25,10 @@ public class CidadeResource {
 	@GetMapping("/{estadoId}/cidades")
 	public ResponseEntity<List<CidadeDTO>> litaEstado(@PathVariable("estadoId") Integer estadoId){
 		
-		List<CidadeDTO> dto = service.findAllEstados(estadoId).stream().map(CidadeDTO::new).collect( Collectors.toList());
+		List<CidadeDTO> dto = service.findAllEstados(estadoId)
+							  .stream()
+							  .map(CidadeDTO::new)
+							  .collect( Collectors.toList());
 		
 		return ResponseEntity.ok().body(dto);
 		
