@@ -53,6 +53,9 @@ public class ClienteService {
 	@Value("${img.prefix.client.profile}")
 	private String prefixo;
 	
+	@Value("${img.profile.size}")
+	private Integer size;
+	
 	public Cliente find(Integer id) {
 		UserSS userAutenticado = UserService.usuarioAuthenticado();
 		if(userAutenticado == null || !userAutenticado.hasRoler(Perfil.ADMIN) && !id.equals(userAutenticado.getId())) {
@@ -131,9 +134,17 @@ public class ClienteService {
 			throw new AuthorizationException("Não Autorizado!");
 		}
 		
-		BufferedImage jpg = imageService.getJpgImageFromFile(multipartFile);
+		BufferedImage jpgImagem = imageService.getJpgImageFromFile(multipartFile);
+		
+		/**
+		 * recortar imagem
+		 */
+		
+		jpgImagem = imageService.resize(jpgImagem);
+		jpgImagem = imageService.cropResize(jpgImagem, size);
+		
 		String fileName = prefixo +userAutenticado.getId()+ ".jpg";
-		 return s3Services.uploadFile(imageService.inputStream(jpg, "jpg"), fileName, "image");
+		 return s3Services.uploadFile(imageService.inputStream(jpgImagem, "jpg"), fileName, "image");
 
 	}
 	
