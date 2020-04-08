@@ -65,6 +65,7 @@ public class ClienteService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
 	}
+
 	
 	@Transactional
 	public Cliente insert(Cliente obj) {
@@ -95,7 +96,11 @@ public class ClienteService {
 	}
 	
 	public Cliente findByEmail(String email) {
-		return repo.findByEmail(email);
+		Cliente em = repo.findByEmail(email);
+		if(em == null) 
+			throw new ObjectNotFoundException("Email não encontrado! " + email);
+		
+		return em;
 	}
 	
 	public Page<Cliente> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {

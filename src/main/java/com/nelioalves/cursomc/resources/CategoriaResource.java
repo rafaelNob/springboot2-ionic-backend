@@ -22,6 +22,8 @@ import com.nelioalves.cursomc.domain.Categoria;
 import com.nelioalves.cursomc.dto.CategoriaDTO;
 import com.nelioalves.cursomc.services.CategoriaService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value="/categorias")
 public class CategoriaResource {
@@ -29,7 +31,7 @@ public class CategoriaResource {
 	@Autowired
 	private CategoriaService service;
 	
-	
+	@ApiOperation(value="Retorna a categoria por id")// swagger
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
 		Categoria obj = service.find(id);

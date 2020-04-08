@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nelioalves.cursomc.dto.CidadeDTO;
-import com.nelioalves.cursomc.dto.EstadoDTO;
 import com.nelioalves.cursomc.services.CidadeService;
 
 @RestController

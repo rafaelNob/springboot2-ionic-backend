@@ -66,6 +66,15 @@ public class ClienteResource {
 		List<ClienteDTO> listDto = list.stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());  
 		return ResponseEntity.ok().body(listDto);
 	}
+	
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	@RequestMapping(value = "/email", method=RequestMethod.GET)
+	public ResponseEntity<ClienteDTO> findByEmail(@Valid @RequestParam("values") String email) {
+		Cliente findByEmail = service.findByEmail(email); 
+		ClienteDTO dto = new ClienteDTO(findByEmail);
+		return ResponseEntity.ok().body(dto);
+	}
+	
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="/page", method=RequestMethod.GET)
 	public ResponseEntity<Page<ClienteDTO>> findPage(

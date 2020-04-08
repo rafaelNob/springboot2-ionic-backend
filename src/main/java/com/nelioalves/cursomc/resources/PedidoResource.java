@@ -18,10 +18,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.nelioalves.cursomc.domain.Categoria;
 import com.nelioalves.cursomc.domain.Cep;
 import com.nelioalves.cursomc.domain.Pedido;
-import com.nelioalves.cursomc.dto.CategoriaDTO;
 import com.nelioalves.cursomc.services.PedidoService;
 
 @RestController
