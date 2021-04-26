@@ -88,7 +88,7 @@
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.4</version>
+			<version>2.7</version>
 		</dependency>
 		<!-- LIB PARA AUXILIXAR NO REDIMENSIONAMENTO DA IMAGEN -->
 		<dependency>
@@ -101,7 +101,7 @@
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.5</version>
+			<version>2.7</version>
 		</dependency>
 		<!-- LIBS PARA AS BIBLIOTECAS DO SWAGGER -->
 
